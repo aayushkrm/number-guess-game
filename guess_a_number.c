@@ -2,16 +2,39 @@
 
 int main()
 {
-    int lower = 0, upper = 1024;
+    int lower = 0, upper = 1024, guess;
+    int num_guesses = 0;
+    char response;
 
-    // here upper stands for non-inclusive bound
-    printf("Think of a number between %d and %d\n", lower, upper - 1);
-    // and it sounds good then to ask user
-    // if the number is LESS than something
+    printf("Think of a number between %d and %d\n", lower, upper);
 
-    // guessing code here
-    // C also has while cycle if needed =)
-    // while ( condition ) { body; }
+    while (lower <= upper)
+    {
+        guess = (lower + upper) / 2;
+        num_guesses++;
+        printf("Is your number %d? (y/n)\n", guess);
+        scanf(" %c", &response);
+
+        if (response == 'y')
+        {
+            printf("Great! I guessed your number in %d guesses.\n", num_guesses);
+            break;
+        }
+        else if (response == 'n')
+        {
+            printf("Is your number less than %d? (y/n)\n", guess);
+            scanf(" %c", &response);
+
+            if (response == 'y')
+            {
+                upper = guess - 1;
+            }
+            else if (response == 'n')
+            {
+                lower = guess + 1;
+            }
+        }
+    }
 
     return 0;
 }
